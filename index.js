@@ -8,7 +8,7 @@ const send = (to, interactive) =>
     method: "POST",
     headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify({ messaging_product: "whatsapp", to, type: "interactive", interactive }),
-  });
+  }).then(async (r) => console.log("SEND RESULT", r.status, await r.text()));
 
 const genderMsg = {
   type: "list",
@@ -39,6 +39,7 @@ app.get("/webhook", (req, res) => {
 
 app.post("/webhook", async (req, res) => {
   res.sendStatus(200);
+  console.log("INCOMING", JSON.stringify(req.body));
   const msg = req.body?.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
   if (!msg) return;
   const from = msg.from;
