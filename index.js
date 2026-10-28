@@ -19,7 +19,7 @@ const genderMsg = {
   action: { button: "Choose | اختر", sections: [{ title: "Choose | اختر", rows: [
     { id: "g_male", title: "👨 Male | ذكر", description: "With Male Therapist | مع معالج" },
     { id: "g_female", title: "👩 Female | أنثى", description: "With Female Therapist | مع معالجة" },
-    { id: "g_couple", title: "👫 Couples | أزواج", 
+    { id: "g_couple", title: "👫 Couples | أزواج" } ] }] },
 };
 
 const serviceMsg = {
