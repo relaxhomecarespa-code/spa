@@ -17,9 +17,9 @@ const genderMsg = {
   body: { text: "⛔🔞 We do not provide any sexual service.\nلا نقدم أي خدمات جنسية.\n\nPlease choose.\nالرجاء الاختيار." },
   footer: { text: "3 PM - 12 AM | 3 م - 12 ص" },
   action: { button: "Choose | اختر", sections: [{ title: "Choose | اختر", rows: [
-    { id: "g_male", title: "Male | ذكر" },
-    { id: "g_female", title: "Female | أنثى" },
-    { id: "g_couple", title: "Couples | أزواج" } ] }] },
+    { id: "g_male", title: "👨 Male | ذكر", description: "With Male Therapist | مع معالج" },
+    { id: "g_female", title: "👩 Female | أنثى", description: "With Female Therapist | مع معالجة" },
+    { id: "g_couple", title: "👫 Couples | أزواج", 
 };
 
 const serviceMsg = {
