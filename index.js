@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const { TOKEN, PHONE_ID, VERIFY_TOKEN } = process.env;
-const seen = new Set();
+const lastReply = new Map();
+const QUIET_MS = 48 * 60 * 60 * 1000;
 
 const send = (to, interactive) =>
   fetch(`https://graph.facebook.com/v23.0/${PHONE_ID}/messages`, {
@@ -45,10 +46,12 @@ app.post("/webhook", async (req, res) => {
   const msg = req.body?.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
   if (!msg) return;
   const from = msg.from;
+  const now = Date.now();
   const id = msg.interactive?.list_reply?.id || msg.interactive?.button_reply?.id;
   if (!id) {
-    if (seen.has(from)) return;
-    seen.add(from);
+    const last = lastReply.get(from);
+    if (last && now - last < QUIET_MS) return;
+    lastReply.set(from, now);
     return send(from, genderMsg);
   }
   if (id.startsWith("g_")) return send(from, serviceMsg);
